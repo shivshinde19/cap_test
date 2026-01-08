@@ -1,0 +1,28 @@
+image: node:20
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Build and Deploy SAP CAP
+          size: 2x
+          script:
+            # Install CF CLI
+            - curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v8" | tar -zx
+            - mv cf8 /usr/local/bin/cf && chmod +x /usr/local/bin/cf
+            
+            # Install dependencies
+            - npm install
+            
+            # Install CDS CLI globally
+            - npm install -g @sap/cds-dk
+            
+            # Build the application
+            - npm run build
+            
+            # Deploy
+            - cf login -a "$CF_API_ENDPOINT" -u "$CF_USERNAME" -p "$CF_PASSWORD" -o "$CF_ORG" -s "$CF_SPACE"
+            - cf push my-bookshop --memory 256M
+            - cf apps
+          caches:
+            - node

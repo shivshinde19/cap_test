@@ -1,0 +1,13 @@
+applications:
+- name: my-cap-app  # Change this to your desired app name
+  memory: 512M
+  instances: 1
+  buildpacks:
+    - nodejs_buildpack
+  path: .
+  command: npm start
+  random-route: true
+  env:
+    NODE_ENV: production
+    CDS_REQUIRES_AUTH_KIND: mocked
+    CDS_SERVE_STATIC: true
