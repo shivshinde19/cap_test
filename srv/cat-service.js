@@ -10,9 +10,9 @@ module.exports = (srv) => {
    
     // Reply mock data for Authors
     srv.on ('READ', 'Authors', ()=>[
-      { ID:101, name:'Emily Brontë' },
+      { ID:101, name:'Emily BrontÃ«' },
       { ID:150, name:'Edgar Allen Poe' },
-      { ID:170, name:'Sushil' },
+      { ID:170, name:'Shiv' },
     ])
    
    }
